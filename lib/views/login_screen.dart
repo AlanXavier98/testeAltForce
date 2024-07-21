@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:online_store/colors/app_colors.dart';
 import 'package:online_store/controllers/login_controller.dart';
+import 'package:online_store/widgets/botao_padrao_widget.dart';
 import 'package:online_store/widgets/input_login_widget.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginController controller = Get.put(LoginController());
 
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+
   @override
   void dispose() {
     emailController.dispose();
@@ -59,8 +62,9 @@ class LoginScreen extends StatelessWidget {
             ),
 
             // Access Button
-            GestureDetector(
-              onTap: () {
+            BotaoPadraoWidget(
+              label: "Next",
+              func: () {
                 if (emailController.text.isEmpty ||
                     passwordController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -72,27 +76,12 @@ class LoginScreen extends StatelessWidget {
                       backgroundColor: Colors.red,
                     ),
                   );
+                } else {
+                  Modular.to.navigate('/welcome');
                 }
               },
-              child: Container(
-                width: double.infinity,
-                margin: const EdgeInsets.only(bottom: 20.0),
-                padding: const EdgeInsets.all(15),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  color: AppColors.primaryColor,
-                ),
-                child: const Center(
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
             ),
+
             const SizedBox(
               height: 50,
             ),

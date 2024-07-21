@@ -33,7 +33,7 @@ class _InputWidgetState extends State<InputWidget> {
         onChanged: (value) {
           widget.ctrl.text = value;
         },
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: AppColors.textColorSecondary),
         decoration: InputDecoration(
           hintText: widget.label,
           hintStyle: TextStyle(color: AppColors.textColorSecondary),
