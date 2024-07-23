@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:online_store/colors/app_colors.dart';
 
-class BotaoPadraoWidget extends StatefulWidget {
+class ButtonPadraoWidget extends StatefulWidget {
   // label é o texto que vai ser mostrado no botão
   final String label;
   // func é a função que será executada ao clicar no botão
   final VoidCallback func;
 
-  BotaoPadraoWidget({
+  ButtonPadraoWidget({
     required this.func,
     required this.label,
   });
 
   @override
-  State<BotaoPadraoWidget> createState() => _BotaoPadraoWidgetState();
+  State<ButtonPadraoWidget> createState() => _ButtonPadraoWidgetState();
 }
 
-class _BotaoPadraoWidgetState extends State<BotaoPadraoWidget> {
+class _ButtonPadraoWidgetState extends State<ButtonPadraoWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

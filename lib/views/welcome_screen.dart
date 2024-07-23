@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:online_store/colors/app_colors.dart';
-import 'package:online_store/widgets/botao_padrao_widget.dart';
+import 'package:online_store/widgets/button_padrao_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -45,12 +45,12 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20.0),
-                  BotaoPadraoWidget(
+                  ButtonPadraoWidget(
                     label: "Let's Start",
                     func: () {
                       // Ação ao clicar no botão
                       Modular.to.navigate(
-                          '/nextScreen'); // substitua com a rota correta
+                          '/productList'); // substitua com a rota correta
                     },
                   ),
                 ],
