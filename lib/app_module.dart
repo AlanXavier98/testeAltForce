@@ -13,6 +13,6 @@ class AppModule extends Module {
     r.child('/welcome', child: (context) => WelcomeScreen());
     r.child('/', child: (context) => LoginScreen());
     r.child('/productList', child: (context) => ProductListScreen());
-    r.child('/productDetail', child: (context) => ProductDetailScreen());
+    //r.child('/productDetail', child: (context) => ProductDetailScreen());
   }
 }

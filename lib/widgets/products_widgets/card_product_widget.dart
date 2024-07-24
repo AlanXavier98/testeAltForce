@@ -1,31 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:online_store/colors/app_colors.dart';
+import 'package:online_store/models/product_model.dart';
+import 'package:online_store/views/product_screens/product_detail_screen.dart';
 
-class CardProductWidget extends StatefulWidget {
-  const CardProductWidget({super.key});
+class CardProductWidget extends StatelessWidget {
+  final Product product;
 
-  @override
-  State<CardProductWidget> createState() => _CardProductWidgetState();
-}
+  const CardProductWidget({super.key, required this.product});
 
-class _CardProductWidgetState extends State<CardProductWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Modular.to.pushNamed('/productDetail');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailScreen(product: product),
+          ),
+        );
       },
       child: Card(
         elevation: 4.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
+            AspectRatio(
+              aspectRatio: 16 / 9, // Proporção da imagem
               child: Image.network(
-                'https://via.placeholder.com/150',
+                product.images.isNotEmpty
+                    ? product.images[0]
+                    : '', // Verifica se há imagens
                 fit: BoxFit.cover,
-                width: double.infinity,
+                errorBuilder: (BuildContext context, Object error,
+                    StackTrace? stackTrace) {
+                  // Imagem padrão em caso de erro
+                  return Image.asset(
+                    'lib/assets/images/placeholder.jpg', // Caminho para a imagem de placeholder
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
             ),
             Padding(
@@ -34,22 +46,26 @@ class _CardProductWidgetState extends State<CardProductWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Product Name',
+                    product.name,
                     style:
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    maxLines: 1, // Limita a 1 linha
+                    overflow: TextOverflow.ellipsis, // Adiciona reticências
                   ),
                   SizedBox(height: 4.0),
                   Text(
-                    'Lorem ipsum dolor sit amet',
+                    product.description,
                     style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),
+                    maxLines: 2, // Limita a 2 linhas
+                    overflow: TextOverflow.ellipsis, // Adiciona reticências
                   ),
-                  SizedBox(height: 4.0),
+                  SizedBox(height: 4.0), // Espaçamento menor para o preço
                   Text(
-                    '\$17.00',
+                    'R\$ ${product.price.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor,
+                      color: Colors.green,
                     ),
                   ),
                 ],

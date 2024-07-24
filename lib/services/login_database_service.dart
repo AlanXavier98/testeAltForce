@@ -31,7 +31,7 @@ class LoginDatabaseService {
     );
     await db.insert(
       'users',
-      {'email': 'alan@gmail.com', 'password': '123'},
+      {'email': 'a', 'password': '123'},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     print("Usuário de teste inserido: alan@gmail.com");
