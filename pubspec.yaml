@@ -38,6 +38,8 @@ dependencies:
   flutter_modular: ^6.3.4
   get: ^4.6.6
   dio: ^5.5.0+1
+  sqflite: ^2.0.0+3
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:

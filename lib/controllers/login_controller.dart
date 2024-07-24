@@ -17,8 +17,6 @@ class LoginController extends GetxController {
       );
       return;
     }
-
-    // Aqui você pode adicionar a lógica de autenticação com sua API
   }
 
   @override

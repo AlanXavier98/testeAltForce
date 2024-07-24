@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:online_store/colors/app_colors.dart';
 import 'package:online_store/controllers/login_controller.dart';
+import 'package:online_store/services/login_database_service.dart';
+import 'package:online_store/services/login_service.dart';
 import 'package:online_store/widgets/button_padrao_widget.dart';
 import 'package:online_store/widgets/input_login_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginController controller = Get.put(LoginController());
-
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final LoginService loginService = LoginService(LoginDatabaseService());
   @override
   void dispose() {
     emailController.dispose();
@@ -76,7 +77,11 @@ class LoginScreen extends StatelessWidget {
                               ),
                             );
                           } else {
-                            Modular.to.navigate('/welcome');
+                            loginService.login(
+                              context,
+                              emailController.text,
+                              passwordController.text,
+                            );
                           }
                         },
                       ),
