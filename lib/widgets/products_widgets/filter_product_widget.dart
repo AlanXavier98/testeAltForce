@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 
-class FilterProductWidget extends StatefulWidget {
-  // label é o texto que vai se mostrado no input antes de digitar algo
-  var label;
-  // TODO Ira servir para mostrar se está selecionado ou nao
-  bool? select;
-  FilterProductWidget({super.key, @required this.label, @required this.select});
+class FilterProductWidget extends StatelessWidget {
+  final String label;
+  final bool select;
+  final VoidCallback onTap; // Adicione um callback para o onTap
 
-  @override
-  State<FilterProductWidget> createState() => _FilterProductWidgetState();
-}
+  const FilterProductWidget({
+    Key? key,
+    required this.label,
+    required this.select,
+    required this.onTap, // Adicione o parâmetro no construtor
+  }) : super(key: key);
 
-class _FilterProductWidgetState extends State<FilterProductWidget> {
   @override
   Widget build(BuildContext context) {
-    return FilterChip(label: Text(widget.label), onSelected: (bool value) {});
+    return GestureDetector(
+      onTap: onTap, // Chama o callback quando o widget é clicado
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          color: select ? Colors.blue : Colors.grey[200],
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: select ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,12 +1,20 @@
-import '../repositories/product_repository.dart';
-import '../../models/product_model.dart';
+import 'package:dio/dio.dart';
+import '../models/product_model.dart';
 
 class ProductService {
-  final ProductRepository _repository;
+  final Dio dio;
 
-  ProductService(this._repository);
+  ProductService(this.dio);
 
-  Future<List<Product>> fetchProducts(String endpoint) async {
-    return await _repository.getProducts(endpoint);
+  Future<List<Product>> fetchProducts() async {
+    final response =
+        await dio.get('https://dummyjson.com/c/96a6-6de1-4f48-a811');
+    if (response.statusCode == 200) {
+      return (response.data['products'] as List)
+          .map((product) => Product.fromJson(product))
+          .toList();
+    } else {
+      throw Exception('Failed to load products');
+    }
   }
 }

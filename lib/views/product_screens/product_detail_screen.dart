@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:online_store/colors/app_colors.dart';
 import 'package:online_store/models/product_model.dart';
+import 'package:online_store/controllers/cart_controller.dart';
+import 'package:online_store/widgets/button_padrao_widget.dart'; // Adicione isso
 
 class ProductDetailScreen extends StatelessWidget {
   final Product product;
+  final CartController cartController =
+      Get.put(CartController()); // Adicione o controlador do carrinho
 
   ProductDetailScreen({Key? key, required this.product}) : super(key: key);
 
@@ -64,18 +69,40 @@ class ProductDetailScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               Text(
-                'Categoria: ${product.category}',
+                'Categorias: ${product.categories.join(", ")}',
                 style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
               ),
               SizedBox(height: 10.0),
               Text(
-                'Avaliação: ${product.rating!.toStringAsFixed(1)}',
+                'Avaliação: ${product.rating != null ? product.rating!.toStringAsFixed(1) : 'N/A'}',
                 style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
               ),
               SizedBox(height: 10.0),
               Text(
                 'Estoque: ${product.stock}',
                 style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
+              ),
+              if (product.isOnSale) SizedBox(height: 10.0),
+              if (product.isOnSale)
+                Text(
+                  'Promoção!',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold),
+                ),
+              SizedBox(height: 20.0),
+              ButtonPadraoWidget(
+                label: 'Adicionar ao Carrinho',
+                func: () {
+                  cartController
+                      .addToCart(product); // Adiciona o produto ao carrinho
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content:
+                            Text('${product.name} adicionado ao carrinho!')),
+                  );
+                },
               ),
             ],
           ),

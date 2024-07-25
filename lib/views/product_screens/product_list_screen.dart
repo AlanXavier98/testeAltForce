@@ -1,20 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart';
 import 'package:online_store/colors/app_colors.dart';
 import 'package:online_store/controllers/product_controller.dart';
-import 'package:online_store/data_sources/product_data_source.dart';
-import 'package:online_store/repositories/product_repository.dart';
 import 'package:online_store/services/product_service.dart';
 import 'package:online_store/widgets/products_widgets/category_filters_widgets.dart';
 import 'package:online_store/widgets/products_widgets/grid_product_widget.dart';
+import 'package:online_store/controllers/cart_controller.dart';
 
 class ProductListScreen extends StatelessWidget {
   final ProductController controller;
+  final CartController cartController = Get.put(CartController());
 
   ProductListScreen({Key? key})
-      : controller = Get.put(ProductController(
-            ProductService(ProductRepository(ProductDataSource(Dio()))))),
+      : controller = Get.put(ProductController(ProductService(Dio()))),
         super(key: key);
 
   @override
@@ -29,9 +28,12 @@ class ProductListScreen extends StatelessWidget {
         iconTheme: IconThemeData(color: AppColors.primaryColor),
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_list, color: AppColors.primaryColor),
+            icon: Icon(Icons.shopping_cart, color: AppColors.primaryColor),
             onPressed: () {
-              // Ação ao clicar no ícone de filtro
+              // Navegar para a tela do carrinho
+              // Modular.to.pushNamed('/cart'); // Se estiver usando Modular
+              Navigator.pushNamed(
+                  context, '/cart'); // Se estiver usando Navigator
             },
           ),
         ],
@@ -41,13 +43,12 @@ class ProductListScreen extends StatelessWidget {
         child: Column(
           children: [
             CategoryFilters(),
+            SizedBox(height: 15),
             Obx(() {
-              // Usando Obx para reagir a mudanças na lista de produtos
-              if (controller.products.isEmpty) {
+              if (controller.filteredProducts.isEmpty) {
                 return Center(child: CircularProgressIndicator());
               }
-              return ProductGrid(
-                  products: controller.products); // Passa a lista de produtos
+              return ProductGrid(products: controller.filteredProducts);
             }),
           ],
         ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:online_store/models/product_model.dart';
 import 'package:online_store/views/product_screens/product_detail_screen.dart';
+import 'package:online_store/widgets/button_padrao_widget.dart';
 
 class CardProductWidget extends StatelessWidget {
   final Product product;
+  final VoidCallback? onRemove; // Adiciona um callback para remoção
 
-  const CardProductWidget({super.key, required this.product});
+  const CardProductWidget({super.key, required this.product, this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,22 @@ class CardProductWidget extends StatelessWidget {
                       color: Colors.green,
                     ),
                   ),
+                  SizedBox(height: 4.0),
+                  if (onRemove != null)
+                    ButtonPadraoWidget(
+                      label: 'Remover do Carrinho',
+                      func: () {
+                        onRemove!();
+                      },
+                    ),
+
+                  // TextButton(
+                  //   onPressed: onRemove,
+                  //   child: Text(
+                  //     'Remover do Carrinho',
+                  //     style: TextStyle(color: Colors.red),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
