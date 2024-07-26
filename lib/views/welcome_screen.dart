@@ -49,8 +49,8 @@ class WelcomeScreen extends StatelessWidget {
                     label: "Let's Start",
                     func: () {
                       // Ação ao clicar no botão
-                      Modular.to.navigate(
-                          '/productList'); // substitua com a rota correta
+                      Modular.to
+                          .navigate('/main'); // substitua com a rota correta
                     },
                   ),
                 ],

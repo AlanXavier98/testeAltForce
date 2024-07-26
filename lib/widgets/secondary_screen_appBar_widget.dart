@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:online_store/colors/app_colors.dart';
+import 'package:online_store/colors/app_colors.dart'; // Importa a função de navegação segura
 
 class SecondaryScreenAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
+
   final Size preferredSize = Size.fromHeight(kToolbarHeight);
 
-  SecondaryScreenAppBarWidget({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
+  SecondaryScreenAppBarWidget({Key? key, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class SecondaryScreenAppBarWidget extends StatelessWidget
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.pop(context); // Usa a função de navegação segura
         },
       ),
       title: Text(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:online_store/colors/app_colors.dart';
 import 'package:online_store/models/product_model.dart';
 import 'package:online_store/controllers/cart_controller.dart';
-import 'package:online_store/widgets/button_padrao_widget.dart'; // Adicione isso
+import 'package:online_store/widgets/button_padrao_widget.dart';
+import 'package:online_store/widgets/secondary_screen_appBar_widget.dart'; // Adicione isso
 
 class ProductDetailScreen extends StatelessWidget {
   final Product product;
@@ -15,19 +17,8 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'Detalhes do Produto',
-          style: TextStyle(color: AppColors.primaryColor),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: AppColors.primaryColor),
+      appBar: SecondaryScreenAppBarWidget(
+        title: 'Detalhes do Produto',
       ),
       body: SingleChildScrollView(
         child: Padding(
