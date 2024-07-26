@@ -44,7 +44,7 @@ class MainScreen extends StatelessWidget {
                 label: 'Pedidos',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
+                icon: Icon(Icons.shopping_cart),
                 label: 'Carrinho',
               ),
               BottomNavigationBarItem(
