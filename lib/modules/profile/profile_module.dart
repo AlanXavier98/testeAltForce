@@ -9,18 +9,18 @@ import 'package:online_store/modules/profile/views/edit_profile_screen.dart';
 
 class ProfileModule extends Module {
   @override
-  List<Bind<Object>> get binds => [
-        Bind.lazySingleton((i) => ProfileController()),
-      ];
+  void binds(Injector i) {
+    i.add<ProfileController>((i) => ProfileController());
+  }
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute(Modular.initialRoute, child: (_, __) => ProfileScreen()),
-        ChildRoute('/addAddress', child: (_, __) => AddAddressScreen()),
-        ChildRoute('/addCard', child: (_, __) => AddCardScreen()),
-        ChildRoute('/changeProfilePicture',
-            child: (_, __) => ChangeProfilePictureScreen()),
-        ChildRoute('/createProfile', child: (_, __) => CreateProfileScreen()),
-        ChildRoute('/editProfile', child: (_, __) => EditProfileScreen()),
-      ];
+  void routes(r) {
+    r.child(Modular.initialRoute, child: (_) => ProfileScreen());
+    r.child('/addAddress', child: (_) => AddAddressScreen());
+    r.child('/addCard', child: (_) => AddCardScreen());
+    r.child('/changeProfilePicture',
+        child: (_) => ChangeProfilePictureScreen());
+    r.child('/createProfile', child: (_) => CreateProfileScreen());
+    r.child('/editProfile', child: (_) => EditProfileScreen());
+  }
 }

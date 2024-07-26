@@ -5,9 +5,6 @@ import 'package:online_store/modules/login/services/login_database_service.dart'
 class LoginService {
   final LoginDatabaseService dbService;
 
-  // Remova esta linha:
-  // final LoginService loginService = LoginService(LoginDatabaseService());
-
   LoginService(this.dbService);
 
   Future<void> login(

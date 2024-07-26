@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
-import 'package:online_store/colors/app_colors.dart';
 import 'package:online_store/modules/login/controllers/login_controller.dart';
-import 'package:online_store/modules/login/services/login_database_service.dart';
-import 'package:online_store/modules/login/services/login_service.dart';
 import 'package:online_store/widgets/button_padrao_widget.dart';
 import 'package:online_store/modules/login/views/widgets/input_login_widget.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginController controller = Get.put(LoginController());
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final LoginService loginService = LoginService(LoginDatabaseService());
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +23,6 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Espaciador flexível para empurrar o conteúdo para baixo
                       Spacer(),
                       Text(
                         'Login',
@@ -49,14 +37,14 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: 30),
                       // Email Input
                       InputWidget(
-                        ctrl: emailController,
+                        ctrl: controller.emailController,
                         label: "E-mail",
                         isPass: false,
                       ),
                       const SizedBox(height: 20),
                       // Password Input
                       InputWidget(
-                        ctrl: passwordController,
+                        ctrl: controller.passwordController,
                         label: '*********',
                         isPass: true,
                       ),
@@ -65,24 +53,8 @@ class LoginScreen extends StatelessWidget {
                       ButtonPadraoWidget(
                         label: "Next",
                         func: () {
-                          if (emailController.text.isEmpty ||
-                              passwordController.text.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Center(
-                                  child: Text(
-                                      'Favor preencher os campos de E-mail e senha.'),
-                                ),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          } else {
-                            loginService.login(
-                              context,
-                              emailController.text,
-                              passwordController.text,
-                            );
-                          }
+                          controller.login(context);
+                          Modular.to.navigate('/welcomeScreen');
                         },
                       ),
                       const SizedBox(height: 50),

@@ -16,12 +16,12 @@ class _ChangeProfilePictureScreenState
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.getImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _selectedImage = File(pickedImage.path);
-      });
-    }
+    // final pickedImage = await picker.getImage(source: ImageSource.gallery);
+    // if (pickedImage != null) {
+    //   setState(() {
+    //     _selectedImage = File(pickedImage.path);
+    //   });
+    // }
   }
 
   @override

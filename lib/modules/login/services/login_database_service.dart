@@ -58,9 +58,4 @@ class LoginDatabaseService {
     }
     return null;
   }
-
-  // Adicione este método
-  Future<void> initialize() async {
-    await database; // Isso garante que o banco de dados seja inicializado
-  }
 }
