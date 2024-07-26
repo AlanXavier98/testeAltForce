@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:online_store/colors/app_colors.dart'; // Importa a função de navegação segura
 
 class SecondaryScreenAppBarWidget extends StatelessWidget
@@ -16,7 +17,7 @@ class SecondaryScreenAppBarWidget extends StatelessWidget
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: AppColors.primaryColor),
         onPressed: () {
-          Navigator.pop(context); // Usa a função de navegação segura
+          Modular.to.pop();
         },
       ),
       title: Text(
